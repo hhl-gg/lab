@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webserver
+    env: testing
+  name: webserver
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+        env: testing
+    spec:
+      containers:
+      - image: httpd:alpine3.18
+        name: httpd
+        command: ["/bin/bash", "-c"]
+        args: ["sleep 5; exit 1"]
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
