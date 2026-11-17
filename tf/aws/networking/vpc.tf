@@ -22,15 +22,27 @@ resource "aws_vpc" "tf_vpc" {
 resource "aws_subnet" "public_subnet" {
   vpc_id = aws_vpc.tf_vpc.id
   cidr_block = "10.0.0.0/24"
+
+  tags = {
+    Name = "terraform"
+  }
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id = aws_subnet.tf_vpc.id
+  vpc_id = aws_vpc.tf_vpc.id
   cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "terraform"
+  }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.tf_vpc.id
+
+  tags = {
+    Name = "terraform"
+  }
 }
 
 resource "aws_route_table" "public_rtb" {
@@ -39,6 +51,10 @@ resource "aws_route_table" "public_rtb" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
+  }
+
+  tags = {
+    Name = "terraform"
   }
 }
 
