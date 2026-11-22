@@ -1,0 +1,11 @@
+ec2_instance_type = "t3.micro"
+
+ec2_volume_config = {
+  size = 6
+  type = "gp2"
+}
+
+additional_tags = {
+  Env = "development"
+  ValuesFrom = "terraform.tfvars"
+}
