@@ -42,3 +42,7 @@ variable "additional_tags" {
   }
 }
 
+variable "secret" {
+  type = string
+  sensitive = true
+}
